@@ -1,0 +1,30 @@
+name : WineQuality Checker
+
+on:
+  push:
+    branches:
+    - main
+    pull request:
+      branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - users: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - name: Set up Python 3.7
+      users: actions/setup-python@v2
+      with:
+        python-version: 3.7
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pytest
+        if [ -f requirements.txt]; then pip install -r requirements.txt; fi
+    -  name: Test with Pytest
+      run: |
+        pytest -v
