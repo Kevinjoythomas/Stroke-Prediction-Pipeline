@@ -4,3 +4,5 @@ scikit-learn
 pandas
 pytest
 tox
+flask
+gunicorn 
