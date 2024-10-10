@@ -19,7 +19,7 @@ def split_save(config_path):
     train,test = train_test_split(
         df,
         test_size=split_ratio,
-        random_state=42
+        random_state=random_state
         )
     
     train.to_csv(train_data_path,sep = ",",index = False)
