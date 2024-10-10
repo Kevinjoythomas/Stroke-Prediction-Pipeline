@@ -3,10 +3,10 @@ name : WineQuality Checker
 on:
   push:
     branches:
-    - main
+      - main
   pull request:
     branches:
-    - main
+     - main
 
 jobs:
   build:
