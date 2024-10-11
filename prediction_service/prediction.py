@@ -3,7 +3,7 @@ import os
 import json
 import numpy as np
 import joblib
-
+import pandas as pd
 params_path = "params.yaml"
 schema_path = os.path.join("prediction_service","schema_in.json")
 
@@ -55,11 +55,11 @@ def validate_input(dict_request):
     for col, val in dict_request.items():
         validate_cols(col)
         validate_values(col,val)
-
+        
+    return True
 def form_response(dict_request):
     if validate_input(dict_request):
-        data = dict_request.values()
-        data = [list(map(float, data))]
+        data = pd.DataFrame([dict_request]) 
         response = predict(data)
         return response
 
@@ -67,7 +67,7 @@ def form_response(dict_request):
 def api_response(dict_request):
     try:
         if validate_input(dict_request):
-            data = np.array([list(dict_request.values())])   
+            data = pd.DataFrame([dict_request]) 
             response = predict(data)
             response = {"response":response} 
             return response
