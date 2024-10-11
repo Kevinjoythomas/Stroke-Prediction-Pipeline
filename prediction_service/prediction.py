@@ -43,7 +43,7 @@ def get_schema(schema_path = schema_path):
     return schema
 
 def validate_input(dict_request):
-    def validate_cols(cols):
+    def validate_cols(col):
         schema = get_schema()
         actual_cols = schema.keys()
         if col not in actual_cols:
@@ -71,6 +71,7 @@ def api_response(dict_request):
             response = predict(data)
             response = {"response":response} 
             return response
+       
     except Exception as e:
         error = {"The expected Range":get_schema(),"response":str(e)}
         return error
