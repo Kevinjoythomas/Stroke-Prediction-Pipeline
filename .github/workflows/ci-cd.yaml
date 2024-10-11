@@ -28,3 +28,13 @@ jobs:
     - name: Test with Pytest
       run: |
         pytest -v
+
+        
+    - name: Deploy to Heroku
+      env:
+        HEROKU_API_TOKEN: 
+        HEROKU_APP_NAME
+      if: github.ref == 'refs/heads/main' && job.status == 'success'
+      run: |
+        git remote add heroku 
+        git push heroku 
