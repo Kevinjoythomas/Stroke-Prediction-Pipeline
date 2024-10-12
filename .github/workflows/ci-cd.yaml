@@ -4,9 +4,11 @@ on:
   push:
     branches:
       - main
+      - main-ml-flow
   pull_request:
     branches:
-      - main
+      - main-ml-flow
+      -main
 
 jobs:
   build:

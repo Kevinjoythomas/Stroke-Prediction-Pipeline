@@ -8,7 +8,7 @@ params_path = "params.yaml"
 schema_path = os.path.join("prediction_service","schema_in.json")
 
 class NotInRange(Exception):
-    def __init__(self, message = "VALUES NOt IN RANGE"):
+    def __init__(self, message = "VALUES NOT IN RANGE"):
         self.message = message
         super().__init__(self.message)
         
