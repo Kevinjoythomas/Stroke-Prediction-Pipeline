@@ -8,7 +8,7 @@ on:
   pull_request:
     branches:
       - main-ml-flow
-      -main
+      - main
 
 jobs:
   build:
