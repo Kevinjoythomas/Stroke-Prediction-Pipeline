@@ -1,4 +1,4 @@
-name: WineQuality Checker
+name: Stroke Prediction
 
 on:
   push:
