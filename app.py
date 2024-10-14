@@ -23,9 +23,9 @@ def index():
                 response = prediction.form_response(data)
                 print(response)
                 if response == 0:
-                    response = "Low Probabilty of Stroke"
+                    response = "Low Probabilty of a Stroke"
                 else:
-                    response = "High Probabilty of Stroke"
+                    response = "High Probabilty of a Stroke"
                 return render_template("index.html",response=response)
             elif request.json:
                 response = prediction.api_response(request.json)
