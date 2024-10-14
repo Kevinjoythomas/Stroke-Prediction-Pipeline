@@ -1,7 +1,7 @@
 {
     "gender": {
-        "min": 0.0,
-        "max": 255.0
+        "min": -1.0,
+        "max": 1.0
     },
     "age": {
         "min": 0.08,
@@ -16,8 +16,8 @@
         "max": 1.0
     },
     "work_type": {
-        "min": 0.0,
-        "max": 255.0
+        "min": -2.0,
+        "max": 2.0
     },
     "Residence_type": {
         "min": 0.0,
@@ -34,9 +34,6 @@
     "smoking_status": {
         "min": 0.0,
         "max": 3.0
-    },
-    "stroke": {
-        "min": 0.0,
-        "max": 1.0
     }
+
 }

@@ -7,25 +7,33 @@ stages:
       hash: md5
       md5: d9a5b44670d96019dedf4e761aded7a2
       size: 322081
+    - path: params.yaml
+      hash: md5
+      md5: 0cc321152536a608b4881730bb62b66a
+      size: 858
     - path: src/get_data.py
       md5: 5ba5cb0809f1d295763b3a9170926036
       size: 655
     - path: src/load_data.py
       hash: md5
-      md5: 2614530611ad1228e4bba37c23975b28
-      size: 2726
+      md5: 6620a49a36779c4e46602c6494dc0d90
+      size: 2682
     outs:
     - path: data/raw/healthcare-dataset-stroke-data.csv
       hash: md5
-      md5: 1e34892ddf9c75bd55095984e17c6db8
-      size: 479668
+      md5: 228b0e8c59604912a15a03885ff2c4e7
+      size: 478918
   split_data:
     cmd: python src/split.py --config=params.yaml
     deps:
     - path: data/raw/healthcare-dataset-stroke-data.csv
       hash: md5
-      md5: 1e34892ddf9c75bd55095984e17c6db8
-      size: 479668
+      md5: 228b0e8c59604912a15a03885ff2c4e7
+      size: 478918
+    - path: params.yaml
+      hash: md5
+      md5: 0cc321152536a608b4881730bb62b66a
+      size: 858
     - path: src/get_data.py
       md5: 5ba5cb0809f1d295763b3a9170926036
       size: 655
@@ -35,27 +43,31 @@ stages:
     outs:
     - path: data/processed/test_stroke.csv
       hash: md5
-      md5: 4346617e1a8f6cc091eb1407c57ba470
-      size: 143089
+      md5: b948abc3cce4a2856849791317fdfac0
+      size: 285275
     - path: data/processed/train_stroke.csv
       hash: md5
-      md5: b4e09a04ed07a4468cf29664a41fc64a
-      size: 335222
+      md5: 2a5b3d31e35f9a35085f8fd486bf65aa
+      size: 192288
   train:
     cmd: python src/train.py --config=params.yaml
     deps:
     - path: data/processed/test_stroke.csv
       hash: md5
-      md5: 4346617e1a8f6cc091eb1407c57ba470
-      size: 143089
+      md5: b948abc3cce4a2856849791317fdfac0
+      size: 285275
     - path: data/processed/train_stroke.csv
       hash: md5
-      md5: b4e09a04ed07a4468cf29664a41fc64a
-      size: 335222
+      md5: 2a5b3d31e35f9a35085f8fd486bf65aa
+      size: 192288
+    - path: params.yaml
+      hash: md5
+      md5: 0cc321152536a608b4881730bb62b66a
+      size: 858
     - path: src/train.py
       hash: md5
-      md5: 4ade0bc3337c101abd6bda59d8cfb0ca
-      size: 2701
+      md5: 2ce6f2591a7b82275844437d32be8939
+      size: 2769
     params:
       params.yaml:
         estimators.LogisticRegression.params.alpha: 0.1
@@ -63,7 +75,7 @@ stages:
     outs:
     - path: saved_models/model.joblib
       hash: md5
-      md5: a9735e07aeb47f90f3ee57820cb4181b
+      md5: 24fc452098e4ef704d0f40c8645dcb4d
       size: 1391
   log_production_model:
     cmd: python src/log_production_model.py --config=params.yaml
