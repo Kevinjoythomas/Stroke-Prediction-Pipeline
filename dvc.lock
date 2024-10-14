@@ -73,6 +73,10 @@ stages:
         estimators.LogisticRegression.params.alpha: 0.1
         estimators.LogisticRegression.params.penalty: l2
     outs:
+    - path: prediction_service/model/model.joblib
+      hash: md5
+      md5: 24fc452098e4ef704d0f40c8645dcb4d
+      size: 1391
     - path: saved_models/model.joblib
       hash: md5
       md5: 24fc452098e4ef704d0f40c8645dcb4d

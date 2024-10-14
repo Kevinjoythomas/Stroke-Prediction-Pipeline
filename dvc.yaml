@@ -33,7 +33,7 @@ stages:
 
     outs:
     -  saved_models/model.joblib
-
+    - prediction_service/model/model.joblib
   # log_production_model:
   #   cmd: python src/log_production_model.py --config=params.yaml
   #   deps:
