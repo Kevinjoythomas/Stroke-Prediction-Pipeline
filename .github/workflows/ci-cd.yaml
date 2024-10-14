@@ -4,10 +4,10 @@ on:
   push:
     branches:
       - main
-      - main-ml-flow
+      - model-tracking
   pull_request:
     branches:
-      - main-ml-flow
+      - model-tracking
       - main
 
 jobs:
