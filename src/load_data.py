@@ -45,14 +45,14 @@ def load_and_save(config_path):
     
     pd.set_option('future.no_silent_downcasting', True)
     
-    df['gender'] = df['gender'].replace({'Male': 0, 'Female': 1, 'Other': -1}).astype(np.uint8)
-    df['smoking_status'] = df['smoking_status'].replace(
-        {'Unknown': 0, 'never smoked': 1, 'formerly smoked': 2, "smokes": 3}
-    ).astype(np.uint8)
-    df['Residence_type'] = df['Residence_type'].replace({'Rural': 0, 'Urban': 1}).astype(np.uint8)
-    df['work_type'] = df['work_type'].replace(
-        {'Private': 0, 'Self-employed': 1, 'Govt_job': 2, 'children': -1, 'Never_worked': -2}
-    ).astype(np.uint8)
+    df['gender'] = df['gender'].map({'Male': 0, 'Female': 1, 'Other': -1}).astype(np.int8)
+
+    df['smoking_status'] = df['smoking_status'].map({'Unknown': 0, 'never smoked': 1, 'formerly smoked': 2, 'smokes': 3}).astype(np.int8)
+
+    df['Residence_type'] = df['Residence_type'].map({'Rural': 0, 'Urban': 1}).astype(np.int8)
+
+    df['work_type'] = df['work_type'].map({'Private': 0, 'Self-employed': 1, 'Govt_job': 2, 'children': -1, 'Never_worked': -2}).astype(np.int8)
+
 
     new_cols = [col.replace(" ", "_") for col in df.columns]
     

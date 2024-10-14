@@ -46,7 +46,8 @@ def train(config_path):
     lr = LogisticRegression(
         C=alpha,
         penalty=penalty,
-        random_state=random_state
+        random_state=random_state,
+        max_iter=max_iter
     )
     
     lr.fit(train_x,train_y)
@@ -74,7 +75,8 @@ def train(config_path):
         params = {
             "Penalty":penalty,
             "alpha":alpha,
-            "random_state":random_state
+            "random_state":random_state,
+            "Max Iterations":max_iter
         }
         json.dump(params,f, indent=4)
 

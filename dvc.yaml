@@ -5,6 +5,7 @@ stages:
     - src/get_data.py
     - src/load_data.py
     - data_given/healthcare-dataset-stroke-data.csv
+    - params.yaml
     outs:
     - data/raw/healthcare-dataset-stroke-data.csv
 
@@ -14,6 +15,7 @@ stages:
     - src/get_data.py
     - src/split.py
     - data/raw/healthcare-dataset-stroke-data.csv
+    - params.yaml
     outs:
     - data/processed/train_stroke.csv
     - data/processed/test_stroke.csv
@@ -24,6 +26,7 @@ stages:
     - data/processed/train_stroke.csv
     - data/processed/test_stroke.csv
     - src/train.py
+    - params.yaml
     params:
     - estimators.LogisticRegression.params.alpha
     - estimators.LogisticRegression.params.penalty
