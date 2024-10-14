@@ -18,6 +18,7 @@ def test_form_for_correct_range(input_data, target_features):
 def test_api_response(input_data, target_features):
     data = input_data["correct_range"]
     res = api_response(data)
+    print("THE RESULTS IS \n \n ",res)
     assert target_features["min"] <= res['response'] <= target_features["max"]
 
 
