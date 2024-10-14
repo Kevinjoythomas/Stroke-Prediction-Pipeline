@@ -1,1 +1,0 @@
-This a Machine Learning Pipeline created using dvc which predicts the wine quality hosted on a Flask server
