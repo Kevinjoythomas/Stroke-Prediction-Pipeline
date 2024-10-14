@@ -5,8 +5,8 @@ stages:
     deps:
     - path: data_given/healthcare-dataset-stroke-data.csv
       hash: md5
-      md5: 3f25a4c2f2963d969e1a156c08968577
-      size: 316971
+      md5: d9a5b44670d96019dedf4e761aded7a2
+      size: 322081
     - path: src/get_data.py
       md5: 5ba5cb0809f1d295763b3a9170926036
       size: 655
@@ -54,8 +54,8 @@ stages:
       size: 130932
     - path: src/train.py
       hash: md5
-      md5: 891597d49d927ee1813d6ee646ecbdbc
-      size: 3544
+      md5: aac077a80bf4b7b94e7a265ad3fd2974
+      size: 2624
     params:
       params.yaml:
         estimators.LogisticRegression.params.alpha: 0.1
