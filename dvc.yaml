@@ -4,29 +4,29 @@ stages:
     deps:
     - src/get_data.py
     - src/load_data.py
-    - data_given/winequality.csv
+    - data_given/healthcare-dataset-stroke-data.csv
     outs:
-    - data/raw/winequality.csv
+    - data/raw/healthcare-dataset-stroke-data.csv
 
   split_data:
     cmd: python src/split.py --config=params.yaml
     deps:
     - src/get_data.py
     - src/split.py
-    - data/raw/winequality.csv
+    - data/raw/healthcare-dataset-stroke-data.csv
     outs:
-    - data/processed/train_winequality.csv
-    - data/processed/test_winequality.csv
+    - data/processed/train_stroke.csv
+    - data/processed/test_stroke.csv
 
   train:
     cmd: python src/train.py --config=params.yaml
     deps:
-    - data/processed/train_winequality.csv
-    - data/processed/test_winequality.csv
+    - data/processed/train_stroke.csv
+    - data/processed/test_stroke.csv
     - src/train.py
     params:
-    - estimators.ElasticNet.params.alpha
-    - estimators.ElasticNet.params.l1_ratio
+    - estimators.LogisticRegression.params.alpha
+    - estimators.LogisticRegression.params.penalty
 
     # outs:
     # -  saved_models/model.joblib
