@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/mlops/wine_proj/mlruns/0/2fb93e5d1fe64d5ead05139768bd93df/artifacts
+end_time: 1728863639415
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 2fb93e5d1fe64d5ead05139768bd93df
+run_name: mlops
+run_uuid: 2fb93e5d1fe64d5ead05139768bd93df
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1728863632377
+status: 3
+tags: []
+user_id: kevin

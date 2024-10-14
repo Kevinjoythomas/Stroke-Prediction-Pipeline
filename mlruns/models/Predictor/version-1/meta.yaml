@@ -1,0 +1,14 @@
+aliases: []
+creation_timestamp: 1728864023368
+current_stage: Staging
+description: ''
+last_updated_timestamp: 1728865713804
+name: Predictor
+run_id: 7e380d525dc84ec48ad530fd0c0d7bfd
+run_link: ''
+source: mlflow-artifacts:/977953143936783915/7e380d525dc84ec48ad530fd0c0d7bfd/artifacts/model
+status: READY
+status_message: null
+storage_location: mlflow-artifacts:/977953143936783915/7e380d525dc84ec48ad530fd0c0d7bfd/artifacts/model
+user_id: null
+version: 1

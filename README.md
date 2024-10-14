@@ -1,0 +1,1 @@
+This a Machine Learning Pipeline created using dvc which predicts wheather a patient will have a stroke hosted on a Flask server

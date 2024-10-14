@@ -1,0 +1,37 @@
+stages:
+  load_data:
+    cmd: python src/load_data.py --config=params.yaml
+    deps:
+    - src/get_data.py
+    - src/load_data.py
+    - data_given/healthcare-dataset-stroke-data.csv
+    outs:
+    - data/raw/healthcare-dataset-stroke-data.csv
+
+  split_data:
+    cmd: python src/split.py --config=params.yaml
+    deps:
+    - src/get_data.py
+    - src/split.py
+    - data/raw/healthcare-dataset-stroke-data.csv
+    outs:
+    - data/processed/train_stroke.csv
+    - data/processed/test_stroke.csv
+
+  train:
+    cmd: python src/train.py --config=params.yaml
+    deps:
+    - data/processed/train_stroke.csv
+    - data/processed/test_stroke.csv
+    - src/train.py
+    params:
+    - estimators.LogisticRegression.params.alpha
+    - estimators.LogisticRegression.params.penalty
+
+    # outs:
+    # -  saved_models/model.joblib
+
+  log_production_model:
+    cmd: python src/log_production_model.py --config=params.yaml
+    deps:
+    - src/log_production_model.py

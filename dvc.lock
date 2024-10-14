@@ -1,0 +1,69 @@
+schema: '2.0'
+stages:
+  load_data:
+    cmd: python src/load_data.py --config=params.yaml
+    deps:
+    - path: data_given/healthcare-dataset-stroke-data.csv
+      hash: md5
+      md5: d9a5b44670d96019dedf4e761aded7a2
+      size: 322081
+    - path: src/get_data.py
+      md5: 5ba5cb0809f1d295763b3a9170926036
+      size: 655
+    - path: src/load_data.py
+      hash: md5
+      md5: 8d574e60789de6371fe8a29358e13129
+      size: 2211
+    outs:
+    - path: data/raw/healthcare-dataset-stroke-data.csv
+      hash: md5
+      md5: ea4e1191d87dace8dfbf09e4a1af1aef
+      size: 163756
+  split_data:
+    cmd: python src/split.py --config=params.yaml
+    deps:
+    - path: data/raw/healthcare-dataset-stroke-data.csv
+      hash: md5
+      md5: ea4e1191d87dace8dfbf09e4a1af1aef
+      size: 163756
+    - path: src/get_data.py
+      md5: 5ba5cb0809f1d295763b3a9170926036
+      size: 655
+    - path: src/split.py
+      md5: 4b059f1e4346ba66326f2a7abc04c631
+      size: 1063
+    outs:
+    - path: data/processed/test_stroke.csv
+      hash: md5
+      md5: c547e5fd5c941becad0f9842d5a04c74
+      size: 32895
+    - path: data/processed/train_stroke.csv
+      hash: md5
+      md5: 4f8cbff136778a383ed7ca5ac2db5dc9
+      size: 130932
+  train:
+    cmd: python src/train.py --config=params.yaml
+    deps:
+    - path: data/processed/test_stroke.csv
+      hash: md5
+      md5: c547e5fd5c941becad0f9842d5a04c74
+      size: 32895
+    - path: data/processed/train_stroke.csv
+      hash: md5
+      md5: 4f8cbff136778a383ed7ca5ac2db5dc9
+      size: 130932
+    - path: src/train.py
+      hash: md5
+      md5: aac077a80bf4b7b94e7a265ad3fd2974
+      size: 2624
+    params:
+      params.yaml:
+        estimators.LogisticRegression.params.alpha: 0.1
+        estimators.LogisticRegression.params.penalty: l2
+  log_production_model:
+    cmd: python src/log_production_model.py --config=params.yaml
+    deps:
+    - path: src/log_production_model.py
+      hash: md5
+      md5: db9735a0de72f4447e27dd7d2a93baf3
+      size: 2301

@@ -1,0 +1,18 @@
+cmd: python src/load_data.py --config=params.yaml
+deps:
+- path: data_given/healthcare-dataset-stroke-data.csv
+  hash: md5
+  md5: d9a5b44670d96019dedf4e761aded7a2
+  size: 322081
+- path: src/get_data.py
+  md5: 5ba5cb0809f1d295763b3a9170926036
+  size: 655
+- path: src/load_data.py
+  hash: md5
+  md5: 8d574e60789de6371fe8a29358e13129
+  size: 2211
+outs:
+- path: data/raw/healthcare-dataset-stroke-data.csv
+  hash: md5
+  md5: ea4e1191d87dace8dfbf09e4a1af1aef
+  size: 163756
