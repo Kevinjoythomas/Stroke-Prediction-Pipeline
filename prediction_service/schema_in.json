@@ -1,0 +1,42 @@
+{
+    "gender": {
+        "min": 0.0,
+        "max": 255.0
+    },
+    "age": {
+        "min": 0.08,
+        "max": 82.0
+    },
+    "hypertension": {
+        "min": 0.0,
+        "max": 1.0
+    },
+    "heart_disease": {
+        "min": 0.0,
+        "max": 1.0
+    },
+    "work_type": {
+        "min": 0.0,
+        "max": 255.0
+    },
+    "Residence_type": {
+        "min": 0.0,
+        "max": 1.0
+    },
+    "avg_glucose_level": {
+        "min": 55.12,
+        "max": 271.74
+    },
+    "bmi": {
+        "min": 10.3,
+        "max": 97.6
+    },
+    "smoking_status": {
+        "min": 0.0,
+        "max": 3.0
+    },
+    "stroke": {
+        "min": 0.0,
+        "max": 1.0
+    }
+}

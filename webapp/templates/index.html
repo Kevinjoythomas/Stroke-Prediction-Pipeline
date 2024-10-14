@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+
+{% block title %}
+WineQuality
+{% endblock title %}
+
+
+{% block custom_css %}
+<!-- Custom CSS -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+{% endblock custom_css %}
+
+
+{% block body %}
+<!-- nav bar -->
+
+<nav class="navbar navbar-expand-lg navbar-light shadow fixed-top" style="background-color: #e3f2fd;">
+    <a class="navbar-brand" href="/">Stroke Prediction</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="https://github.com/c17hawke/dvc-plus-cml-test">source code</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div>
+    <!-- nav bar ends -->
+
+    <div class="container-fluid masthead">
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <form method="POST">
+                        <!-- Input block-->
+                        <div class="form-group">
+                            <label for="translation">
+                                <blockquote class="blockquote">
+                                    <p class="mb-2">Enter the details as indicated:</p>
+                                </blockquote>
+                            </label>
+
+                            <textarea class="form-control" name="gender" rows="1"
+                                placeholder="Gender expected values: 0 (Male), 1 (Female), -1 (Other)"></textarea>
+
+                            <textarea class="form-control" name="age" rows="1"
+                                placeholder="Age expected range 0.08 to 82.0"></textarea>
+
+                            <textarea class="form-control" name="hypertension" rows="1"
+                                placeholder="Hypertension expected values 0 (No) or 1 (Yes)"></textarea>
+
+                            <textarea class="form-control" name="heart_disease" rows="1"
+                                placeholder="Heart Disease expected values 0 (No) or 1 (Yes)"></textarea>
+
+                            <textarea class="form-control" name="work_type" rows="1"
+                            placeholder="Work Type expected values: 0 (Private), 1 (Self-employed), 2 (Govt Job), -1 (Children), -2 (Never Worked)"></textarea>
+
+                            <textarea class="form-control" name="Residence_type" rows="1"
+                            placeholder="Residence Type expected values: 0 (Rural), 1 (Urban)"></textarea>
+
+                            <textarea class="form-control" name="avg_glucose_level" rows="1"
+                                placeholder="Average Glucose Level expected range 55.12 to 271.74"></textarea>
+                                
+                            <textarea class="form-control" name="bmi" rows="1"
+                                placeholder="BMI expected range 10.30 to 97.60"></textarea>
+                            
+                            <textarea class="form-control" name="smoking_status" rows="1"
+                                placeholder="Smoking Status expected values: 0 (Unknown), 1 (Never Smoked), 2 (Formerly Smoked), 3 (Smokes)"></textarea>
+            
+                            
+
+                        </div>
+
+                        <!-- Select output language here. -->
+                        <div class="form-group">
+                        </div>
+                        <button type="submit" class="btn btn-primary mb-2">Predict</button></br>
+                        </br>
+                    </form>
+                    <!-- Translated text returned by the Translate API is rendered here. -->
+                </div>
+                <div class="col">
+                    <form>
+                        <div class="form-group">
+                            <label for="translation-result">
+
+                                <blockquote class="blockquote">
+                                    <p class="mb-2">Prediction:</p>
+                                </blockquote>
+
+                            </label>
+                            <textarea readonly class="form-control" id="exTextarea" rows="5">{{ response }}</textarea>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        {% endblock body %}
+
+        {% block custom_js %}
+        <!-- Custom JS -->
+        <script src="{{ url_for('static', filename='script/index.js') }}"></script>
+        {% endblock custom_js %}
