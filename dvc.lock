@@ -3,25 +3,29 @@ stages:
   load_data:
     cmd: python src/load_data.py --config=params.yaml
     deps:
-    - path: data_given/winequality.csv
-      md5: ccc8d3507eb151f53f760d36abdef888
-      size: 91998
+    - path: data_given/healthcare-dataset-stroke-data.csv
+      hash: md5
+      md5: 3f25a4c2f2963d969e1a156c08968577
+      size: 316971
     - path: src/get_data.py
       md5: 5ba5cb0809f1d295763b3a9170926036
       size: 655
     - path: src/load_data.py
-      md5: 0bc5ee64b08b32deab481c7d95c616f1
-      size: 654
+      hash: md5
+      md5: 8d574e60789de6371fe8a29358e13129
+      size: 2211
     outs:
-    - path: data/raw/winequality.csv
-      md5: d98e8f2eca228c11c4de1cc96866a54d
-      size: 93598
+    - path: data/raw/healthcare-dataset-stroke-data.csv
+      hash: md5
+      md5: ea4e1191d87dace8dfbf09e4a1af1aef
+      size: 163756
   split_data:
     cmd: python src/split.py --config=params.yaml
     deps:
-    - path: data/raw/winequality.csv
-      md5: d98e8f2eca228c11c4de1cc96866a54d
-      size: 93598
+    - path: data/raw/healthcare-dataset-stroke-data.csv
+      hash: md5
+      md5: ea4e1191d87dace8dfbf09e4a1af1aef
+      size: 163756
     - path: src/get_data.py
       md5: 5ba5cb0809f1d295763b3a9170926036
       size: 655
@@ -29,33 +33,37 @@ stages:
       md5: 4b059f1e4346ba66326f2a7abc04c631
       size: 1063
     outs:
-    - path: data/processed/test_winequality.csv
-      md5: 01718da3bd6e206060ed00667ca1a389
-      size: 18831
-    - path: data/processed/train_winequality.csv
-      md5: 4bccf4d668cdc60115de42ba74d416ab
-      size: 74913
+    - path: data/processed/test_stroke.csv
+      hash: md5
+      md5: c547e5fd5c941becad0f9842d5a04c74
+      size: 32895
+    - path: data/processed/train_stroke.csv
+      hash: md5
+      md5: 4f8cbff136778a383ed7ca5ac2db5dc9
+      size: 130932
   train:
     cmd: python src/train.py --config=params.yaml
     deps:
-    - path: data/processed/test_winequality.csv
-      md5: 01718da3bd6e206060ed00667ca1a389
-      size: 18831
-    - path: data/processed/train_winequality.csv
-      md5: 4bccf4d668cdc60115de42ba74d416ab
-      size: 74913
+    - path: data/processed/test_stroke.csv
+      hash: md5
+      md5: c547e5fd5c941becad0f9842d5a04c74
+      size: 32895
+    - path: data/processed/train_stroke.csv
+      hash: md5
+      md5: 4f8cbff136778a383ed7ca5ac2db5dc9
+      size: 130932
     - path: src/train.py
       hash: md5
-      md5: b3bec5c124d6a1ed40d0455e4036606b
-      size: 3289
+      md5: 891597d49d927ee1813d6ee646ecbdbc
+      size: 3544
     params:
       params.yaml:
-        estimators.ElasticNet.params.alpha: 0.5
-        estimators.ElasticNet.params.l1_ratio: 0.85
+        estimators.LogisticRegression.params.alpha: 0.1
+        estimators.LogisticRegression.params.penalty: l2
   log_production_model:
     cmd: python src/log_production_model.py --config=params.yaml
     deps:
     - path: src/log_production_model.py
       hash: md5
-      md5: ebf33bb6dcda39ab7801bccc68177b2b
-      size: 1821
+      md5: db9735a0de72f4447e27dd7d2a93baf3
+      size: 2301

@@ -1,25 +1,26 @@
 base:
-  project: winequality-project
+  project: Stroke-Prediction-Project
   random_state: 42
-  target_col: TARGET
+  target_col: stroke
 
 data_source:
-  s3_source: data_given/winequality.csv
+  s3_source: data_given/healthcare-dataset-stroke-data.csv
 
 load_data:
-  raw_dataset_csv: data/raw/winequality.csv
+  raw_dataset_csv: data/raw/healthcare-dataset-stroke-data.csv
 
 split_data:
-  train_path: data/processed/train_winequality.csv
-  test_path: data/processed/test_winequality.csv
+  train_path: data/processed/train_stroke.csv
+  test_path: data/processed/test_stroke.csv
   test_size : 0.2
 
 estimators:
-  ElasticNet:
+  LogisticRegression:
     params:
-      alpha: 0.5
-      l1_ratio: 0.85
-
+      alpha: 0.1
+      penalty: l2
+      random_state: 42
+      max_iterations: 500
 model_dir: saved_models
 
 reports:
@@ -30,7 +31,7 @@ webapp_model_dir: prediction_service/model/model.joblib
 
 mlflow_config:
   artifacts_dir: artifacts
-  experiment_name: ElasticNet regression
-  run_name: mlops
-  registered_model_name: ElasticNetWineModel
-  remote_server_url: http://127.0.0.1:1234
+  experiment_name: Stroke Prediction
+  run_name: Logistic Regression
+  registered_model_name: Predictor
+  remote_server_url: http://127.0.0.1:5000

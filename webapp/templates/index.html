@@ -15,7 +15,7 @@ WineQuality
 <!-- nav bar -->
 
 <nav class="navbar navbar-expand-lg navbar-light shadow fixed-top" style="background-color: #e3f2fd;">
-    <a class="navbar-brand" href="/">WineQualityPrediction</a>
+    <a class="navbar-brand" href="/">Stroke Prediction</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -50,28 +50,35 @@ WineQuality
                                     <p class="mb-2">Enter the details as indicated:</p>
                                 </blockquote>
                             </label>
-                            <textarea class="form-control" name="fixed_acidity" rows="1"
-                                placeholder="fixed acidity expected range 4.6 to 15.9"></textarea>
-                            <textarea class="form-control" name="volatile_acidity" rows="1"
-                                placeholder="volatile acidity expected range 0.12 to 1.58"></textarea>
-                            <textarea class="form-control" name="citric_acid" rows="1"
-                                placeholder="citric acid expected range 0.0 to 1.0"></textarea>
-                            <textarea class="form-control" name="residual_sugar" rows="1"
-                                placeholder="residual sugar expected range 0.9 to 15.5"></textarea>
-                            <textarea class="form-control" name="chlorides" rows="1" 
-                                placeholder="chlorides expected range 0.012 to 0.611"></textarea>
-                            <textarea class="form-control" name="free_sulfur_dioxide" rows="1"
-                                placeholder="free sulfur dioxide expected range 1.0 to 72.0"></textarea>
-                            <textarea class="form-control" name="total_sulfur_dioxide" rows="1"
-                                placeholder="total sulfur dioxide expected range 6.0 to 289.0"></textarea>
-                            <textarea class="form-control" name="density" rows="1" 
-                                placeholder="density expected range 0.99007 to 1.00369"></textarea>
-                            <textarea class="form-control" name="pH" rows="1" 
-                                placeholder="pH expected range 2.74 to 4.01"></textarea>
-                            <textarea class="form-control" name="sulphates" rows="1" 
-                                placeholder="sulphates expected range 0.33 to 2.0"></textarea>
-                            <textarea class="form-control" name="alcohol" rows="1" 
-                                placeholder="alcohol expected range 8.4 to 14.9"></textarea>
+
+                            <textarea class="form-control" name="gender" rows="1"
+                                placeholder="Gender expected values: 0 (Male), 1 (Female), -1 (Other)"></textarea>
+
+                            <textarea class="form-control" name="age" rows="1"
+                                placeholder="Age expected range 0.08 to 82.0"></textarea>
+
+                            <textarea class="form-control" name="hypertension" rows="1"
+                                placeholder="Hypertension expected values 0 (No) or 1 (Yes)"></textarea>
+
+                            <textarea class="form-control" name="heart_disease" rows="1"
+                                placeholder="Heart Disease expected values 0 (No) or 1 (Yes)"></textarea>
+
+                            <textarea class="form-control" name="work_type" rows="1"
+                            placeholder="Work Type expected values: 0 (Private), 1 (Self-employed), 2 (Govt Job), -1 (Children), -2 (Never Worked)"></textarea>
+
+                            <textarea class="form-control" name="Residence_type" rows="1"
+                            placeholder="Residence Type expected values: 0 (Rural), 1 (Urban)"></textarea>
+
+                            <textarea class="form-control" name="avg_glucose_level" rows="1"
+                                placeholder="Average Glucose Level expected range 55.12 to 271.74"></textarea>
+                                
+                            <textarea class="form-control" name="bmi" rows="1"
+                                placeholder="BMI expected range 10.30 to 97.60"></textarea>
+                            
+                            <textarea class="form-control" name="smoking_status" rows="1"
+                                placeholder="Smoking Status expected values: 0 (Unknown), 1 (Never Smoked), 2 (Formerly Smoked), 3 (Smokes)"></textarea>
+            
+                            
 
                         </div>
 
