@@ -57,6 +57,8 @@ def train(config_path):
     os.makedirs(model_dir, exist_ok=True)
     model_path = os.path.join(model_dir,"model.joblib")
     joblib.dump(lr,model_path)
+    model_path = config['webapp_model_dir']
+    joblib.dump(lr,model_path)
     
     scores_file = config['reports']['scores']
     params_file = config['reports']['params']
