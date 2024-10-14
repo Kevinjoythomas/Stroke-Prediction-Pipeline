@@ -1,5 +1,5 @@
 {
-    "L1_ratio": 0.85,
-    "alpha": 0.85,
+    "Penalty": "l2",
+    "alpha": 0.1,
     "random_state": 42
 }

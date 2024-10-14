@@ -43,56 +43,38 @@ def train(config_path):
     train_x = train.drop(target_col,axis = 1)
     test_x = test.drop(target_col,axis = 1)
     
-    ######### mlflow
-    mlflow_config = config["mlflow_config"]
-    remote_server_uri = mlflow_config['remote_server_url']
-    experiment_name = mlflow_config['experiment_name'] 
-    print(remote_server_uri)
+    lr = LogisticRegression(
+        C=alpha,
+        penalty=penalty,
+        random_state=random_state
+    )
+    
+    lr.fit(train_x,train_y)
+    
+    elastic_predicted = lr.predict(test_x)
+    (rmse, mae, r2) = eval(elastic_predicted,test_y)
 
-    # Set the MLflow tracking URI to the remote server
-    mlflow.set_tracking_uri(remote_server_uri)
-    print("setting experiment")
-    mlflow.set_experiment(experiment_name)
-    # Start the MLflow run
-    with mlflow.start_run(run_name=mlflow_config['run_name']) as mlops_run:
-        
-        # Train the model
-        lr = LogisticRegression(
-            max_iter=max_iter,
-            C=alpha,
-            penalty=penalty,
-            random_state=random_state
-        )
-        
-        lr.fit(train_x, train_y)
-        
-        # Make predictions and evaluate
-        lr_pred = lr.predict(test_x)
-        (rmse, mae, r2) = eval(lr_pred, test_y)
+    os.makedirs(model_dir, exist_ok=True)
+    model_path = os.path.join(model_dir,"model.joblib")
+    joblib.dump(lr,model_path)
+    
+    scores_file = config['reports']['scores']
+    params_file = config['reports']['params']
+    with open(scores_file,"w") as f:
+        scores = {
+            "rmse":rmse,
+            "mae":mae,
+            "r2":r2
+        }
+        json.dump(scores,f, indent=4)
 
-        # Log parameters and metrics to MLflow
-        mlflow.log_param("C", alpha)
-        mlflow.log_param("Penalty", penalty)
-        
-        mlflow.log_metric("rmse", rmse)
-        mlflow.log_metric("r2", r2)
-        mlflow.log_metric("mae", mae)
-        
-        # Get the tracking URI scheme (file or http)
-        tracking_url_type_store = urlparse(mlflow.get_artifact_uri()).scheme
-        print("tracking url")
-
-        # Log the model based on the artifact storage type
-        if tracking_url_type_store != "file":
-            # Log the model to the remote tracking server
-            mlflow.sklearn.log_model(
-                lr,
-                "model",
-                registered_model_name=mlflow_config["registered_model_name"]
-            )
-        else:
-            # Log the model locally (in case of file storage)
-            mlflow.sklearn.log_model(lr, "model")
+    with open(params_file,"w") as f:
+        params = {
+            "Penalty":penalty,
+            "alpha":alpha,
+            "random_state":random_state
+        }
+        json.dump(params,f, indent=4)
 
 
    
