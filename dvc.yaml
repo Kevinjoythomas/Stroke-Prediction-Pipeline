@@ -28,8 +28,8 @@ stages:
     - estimators.LogisticRegression.params.alpha
     - estimators.LogisticRegression.params.penalty
 
-    # outs:
-    # -  saved_models/model.joblib
+    outs:
+    -  saved_models/model.joblib
 
   log_production_model:
     cmd: python src/log_production_model.py --config=params.yaml
