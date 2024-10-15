@@ -21,8 +21,7 @@ def get_data(config_path):
                   aws_access_key_id=aws_access_key_id, 
                   aws_secret_access_key=aws_secret_access_key)
     
-    # Use BytesIO instead of StringIO
-    csv_buffer = BytesIO()  # Change this line
+    csv_buffer = BytesIO() 
     s3.download_fileobj(bucket_name, file_key, csv_buffer)
     
     csv_buffer.seek(0)  
