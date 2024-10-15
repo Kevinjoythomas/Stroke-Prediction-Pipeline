@@ -69,7 +69,7 @@ Every push triggers the following:
 ## 🌐 Flask App Usage
 Once the Flask server is running, predictions can be made by sending a POST request with a CSV file to:
 
-http://ec2-13-60-233-133.eu-north-1.compute.amazonaws.com:5000/predict
+[Stroke Prediction Site](http://ec2-13-60-233-133.eu-north-1.compute.amazonaws.com:5000/)
 
 # 🧑‍🔬 Testing  
 The project uses **Pytest** for unit tests and **Tox** for cross-environment testing.
