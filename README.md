@@ -1,11 +1,12 @@
 # 🧠 Stroke Prediction Pipeline 🚀 | MLOps at Scale
 
-Welcome to the Stroke Prediction Pipeline project! This project covers all stages of the ML lifecycle—from data ingestion to model serving in a production-ready pipeline. With CI/CD automation, MLFlow tracking, and DVC pipeline orchestration, this repository demonstrates an end-to-end MLOps framework designed to efficiently tackle real-world machine learning challenges.
+Welcome To The Stroke Prediction Pipeline Project! This Project Covers All Stages Of The ML Lifecycle—From Data Ingestion To Model Serving In a Production-Ready Pipeline. With CI/CD Automation, MLFlow Tracking, and DVC Pipeline Orchestration, This Repository Demonstrates an End-To-End MLOps Framework Designed To Tackle Real-World Machine Learning Challenges Efficiently
 
 ## 🔍 Overview
-This project builds a **logistic regression model** to predict the likelihood of stroke based on a dataset. With a modular pipeline architecture and MLFlow tracking, it captures the complete process of building, training, evaluating, and deploying the model. Data is pulled directly from **AWS S3**, and the model is served on a **Flask server** hosted on **AWS EC2**.
+This Project Builds a Logistic Regression Model To Predict The Likelihood Of Stroke Based On A Dataset. With a Modular Pipeline Architecture and MLFlow Tracking, It Captures The Complete Process Of Building, Training, Evaluating, and Deploying The Model. Data is Pulled Directly from AWS S3, and The Model Is Served On a Flask Server Hosted on AWS EC2.
 
 ## 🌐 Live Model Endpoint:
+It Ensures That All Inputs are Within The Recommended Range.
 [Stroke Prediction Site](http://ec2-13-60-233-133.eu-north-1.compute.amazonaws.com:5000/)
 
 ![Website](https://github.com/Kevinjoythomas/Stroke-Prediction-Pipeline/blob/main/website.png)
