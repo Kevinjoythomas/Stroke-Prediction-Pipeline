@@ -1,11 +1,11 @@
 # 🧠 Stroke Prediction Pipeline 🚀 | MLOps at Scale
 
-Welcome to the **Stroke Prediction Pipeline** project! This project covers all stages of the ML lifecycle – from data ingestion to model serving in a production-ready pipeline. With CI/CD automation, MLFlow tracking, and DVC pipeline orchestration, this repository demonstrates an end-to-end MLOps framework designed to tackle real-world machine learning challenges efficiently.
+Welcome to the Stroke Prediction Pipeline project! This project covers all stages of the ML lifecycle—from data ingestion to model serving in a production-ready pipeline. With CI/CD automation, MLFlow tracking, and DVC pipeline orchestration, this repository demonstrates an end-to-end MLOps framework designed to efficiently tackle real-world machine learning challenges.
 
 ## 🔍 Overview
 This project builds a **logistic regression model** to predict the likelihood of stroke based on a dataset. With a modular pipeline architecture and MLFlow tracking, it captures the complete process of building, training, evaluating, and deploying the model. Data is pulled directly from **AWS S3**, and the model is served on a **Flask server** hosted on **AWS EC2**.
 
-### 🌐 Live Model Endpoint:
+## 🌐 Live Model Endpoint:
 [Stroke Prediction Site](http://ec2-13-60-233-133.eu-north-1.compute.amazonaws.com:5000/)
 
 ![Website](https://github.com/Kevinjoythomas/Stroke-Prediction-Pipeline/blob/main/website.png)
@@ -17,16 +17,16 @@ This project builds a **logistic regression model** to predict the likelihood of
 
 ## 🚀 Key Features
 
-### 🛠️ End-to-End Machine Learning Pipeline
+## 🛠️ End-to-End Machine Learning Pipeline
 - **DVC (Data Version Control)** to manage the ML pipeline  
 - **AWS S3** used for storage of datasets and intermediate artifacts  
 - **MLFlow** to track experiments, metrics, and parameters  
 
-### ✅ CI/CD with GitHub Actions
+## ✅ CI/CD with GitHub Actions
 - Automated testing using **Pytest** and **Tox**  
 - Deployment pipeline ensures continuous integration and delivery with every code change  
 
-### 📊 Comprehensive Evaluation Metrics
+## 📊 Comprehensive Evaluation Metrics
 **Model:** Logistic Regression
 
 | Metric       | Precision | Recall | F1-Score | Support |
@@ -43,20 +43,20 @@ This project builds a **logistic regression model** to predict the likelihood of
 
 # 🧪 Model Development Stages
 
-### Exploratory Data Analysis (EDA)
+## Exploratory Data Analysis (EDA)
 - Extensive EDA to understand data distributions, patterns, and outliers  
 - Feature selection to retain only the most relevant predictors  
 
-### Preprocessing & Pipeline
+## Preprocessing & Pipeline
 - Handled missing values and data imbalances  
 - Created pipelines for data ingestion, preprocessing, feature extraction, and model training  
 
-### Model Training & Evaluation
+## Model Training & Evaluation
 - **Model:** Logistic Regression  
 - Tracked hyperparameters and metrics using **MLFlow**  
 - Stored datasets and models with **DVC** for seamless version control  
 
-### Deployment on AWS EC2
+## Deployment on AWS EC2
 - Hosted the Flask app on **AWS EC2** with the model endpoint ready for predictions  
 
 ---
@@ -71,7 +71,7 @@ Every push triggers the following:
 
 ---
 
-# 🧑‍🔬 Testing  
+## 🧑‍🔬 Testing  
 The project uses **Pytest** for unit tests and **Tox** for cross-environment testing.
 
 ## 🎯 Key Technologies Used
