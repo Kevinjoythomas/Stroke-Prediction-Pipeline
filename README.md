@@ -1,12 +1,12 @@
 # 🧠 Stroke Prediction Pipeline 🚀 | MLOps at Scale
 
-Welcome To The Stroke Prediction Pipeline Project! This Project Covers All Stages Of The ML Lifecycle—From Data Ingestion To Model Serving In a Production-Ready Pipeline. With CI/CD Automation, MLFlow Tracking, and DVC Pipeline Orchestration, This Repository Demonstrates an End-To-End MLOps Framework Designed To Tackle Real-World Machine Learning Challenges Efficiently
+Welcome To The Stroke Prediction Pipeline Project! This Project Covers All Stages Of The ML Lifecycle—From Data Ingestion To Model Serving In a Production-Ready Pipeline. With CI/CD Automation using **Github Actions**, **MLFlow** Tracking, and **DVC** Pipeline Orchestration, This Repository Demonstrates an End-To-End **MLOps** Framework Designed To Tackle Real-World Machine Learning Challenges Efficiently
 
 ## 🔍 Overview
-This Project Builds a Logistic Regression Model To Predict The Likelihood Of Stroke Based On A Dataset. With a Modular Pipeline Architecture and MLFlow Tracking, It Captures The Complete Process Of Building, Training, Evaluating, and Deploying The Model. Data is Pulled Directly from AWS S3, and The Model Is Served On a Flask Server Hosted on AWS EC2.
+This Project Builds a **Logistic Regression** Model To Predict The Likelihood Of Stroke Based On A Dataset. With a Modular Pipeline Architecture and MLFlow Tracking, It Captures The Complete Process Of Building, **Training, Evaluating, and Deploying** The Model. Data is Pulled Directly from **AWS S3**, and The Model Is Served On a Flask Server Hosted on **AWS EC2**.
 
 ## 🌐 Live Model Endpoint:
-It Ensures That All Inputs are Within The Recommended Range.
+A Website Developed With **HTML** And **CSS**, Hosted On A **Flask** Server, Ensures That All Inputs Fall Within The Recommended Range.
 [Stroke Prediction Site](http://ec2-13-60-233-133.eu-north-1.compute.amazonaws.com:5000/)
 
 ![Website](https://github.com/Kevinjoythomas/Stroke-Prediction-Pipeline/blob/main/website.png)
@@ -81,6 +81,7 @@ The project uses **Pytest** for unit tests and **Tox** for cross-environment tes
 - **Cloud**: AWS EC2, S3
 - **CI/CD**: GitHub Actions
 - **Testing**: Pytest, Tox
+- **Website**: HTML, CSS
 - **Server**: Flask + Gunicorn
 
 ## 🛡️ Results
