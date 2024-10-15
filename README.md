@@ -6,9 +6,14 @@ Welcome to the **Stroke Prediction Pipeline** project! This project covers all s
 This project builds a **logistic regression model** to predict the likelihood of stroke based on a dataset. With a modular pipeline architecture and MLFlow tracking, it captures the complete process of building, training, evaluating, and deploying the model. Data is pulled directly from **AWS S3**, and the model is served on a **Flask server** hosted on **AWS EC2**.
 
 ### 🌐 Live Model Endpoint:
-**Stroke Prediction Flask App**
+[Stroke Prediction Site](http://ec2-13-60-233-133.eu-north-1.compute.amazonaws.com:5000/)
+
+![Website](https://github.com/Kevinjoythomas/Stroke-Prediction-Pipeline/blob/main/website.png)
 
 ---
+
+## Implementation of Google Pipeline Diagram for Project Workflow
+![Project Structure](https://github.com/Kevinjoythomas/Stroke-Prediction-Pipeline/blob/main/pipeline.jpeg)
 
 ## 🚀 Key Features
 
@@ -65,11 +70,6 @@ Every push triggers the following:
 - **Deployment to EC2:** If all tests pass, the app is redeployed to the AWS server  
 
 ---
-
-## 🌐 Flask App Usage
-Once the Flask server is running, predictions can be made by sending a POST request with a CSV file to:
-
-[Stroke Prediction Site](http://ec2-13-60-233-133.eu-north-1.compute.amazonaws.com:5000/)
 
 # 🧑‍🔬 Testing  
 The project uses **Pytest** for unit tests and **Tox** for cross-environment testing.
