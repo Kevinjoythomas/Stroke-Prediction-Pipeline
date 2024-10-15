@@ -4,7 +4,8 @@ base:
   target_col: stroke
 
 data_source:
-  s3_source: data_given/healthcare-dataset-stroke-data.csv
+  s3_bucket: strokepreddata
+  s3_file_key: healthcare-dataset-stroke-data.csv
 
 load_data:
   raw_dataset_csv: data/raw/healthcare-dataset-stroke-data.csv

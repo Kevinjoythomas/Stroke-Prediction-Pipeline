@@ -7,3 +7,4 @@ tox
 flask
 gunicorn 
 mlflow
+boto3
