@@ -9,11 +9,12 @@ stages:
       size: 322081
     - path: params.yaml
       hash: md5
-      md5: 0cc321152536a608b4881730bb62b66a
-      size: 858
+      md5: a08afee93d689d392a6edc07b8e119bb
+      size: 878
     - path: src/get_data.py
-      md5: 5ba5cb0809f1d295763b3a9170926036
-      size: 655
+      hash: md5
+      md5: dade1961ccbef54bded07462a4c330ad
+      size: 1256
     - path: src/load_data.py
       hash: md5
       md5: 6620a49a36779c4e46602c6494dc0d90
@@ -32,11 +33,12 @@ stages:
       size: 478918
     - path: params.yaml
       hash: md5
-      md5: 0cc321152536a608b4881730bb62b66a
-      size: 858
+      md5: a08afee93d689d392a6edc07b8e119bb
+      size: 878
     - path: src/get_data.py
-      md5: 5ba5cb0809f1d295763b3a9170926036
-      size: 655
+      hash: md5
+      md5: dade1961ccbef54bded07462a4c330ad
+      size: 1256
     - path: src/split.py
       md5: 4b059f1e4346ba66326f2a7abc04c631
       size: 1063
@@ -62,8 +64,8 @@ stages:
       size: 192288
     - path: params.yaml
       hash: md5
-      md5: 0cc321152536a608b4881730bb62b66a
-      size: 858
+      md5: a08afee93d689d392a6edc07b8e119bb
+      size: 878
     - path: src/train.py
       hash: md5
       md5: 2ce6f2591a7b82275844437d32be8939
