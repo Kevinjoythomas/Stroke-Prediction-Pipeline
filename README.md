@@ -38,21 +38,7 @@ This project builds a **logistic regression model** to predict the likelihood of
 
 ## 📂 Project Structure
 
-Stroke-Prediction-Pipeline/
-│
-├── data/                   # Raw and processed data
-├── models/                 # Model artifacts (stored in AWS S3)
-├── notebooks/              # Jupyter notebooks for EDA and prototyping
-├── src/                    # Source code for the pipeline
-│   ├── data_preprocessing.py 
-│   ├── feature_engineering.py 
-│   └── train_model.py 
-├── tests/                  # Unit and integration tests (Tox & Pytest)
-├── .github/workflows/      # CI/CD pipeline definition (GitHub Actions)
-├── requirements.txt        # Python dependencies
-├── dvc.yaml                # DVC pipeline configuration
-├── app.py                  # Flask server for model serving
-└── README.md               # Project documentation
+Stroke-Prediction-Pipeline/ │ ├── data/ # Raw and processed data ├── models/ # Model artifacts (stored in AWS S3) ├── notebooks/ # Jupyter notebooks for EDA and prototyping ├── src/ # Source code for the pipeline │ ├── data_preprocessing.py │ ├── feature_engineering.py │ └── train_model.py ├── tests/ # Unit and integration tests (Tox & Pytest) ├── .github/workflows/ # CI/CD pipeline definition (GitHub Actions) ├── requirements.txt # Python dependencies ├── dvc.yaml # DVC pipeline configuration ├── app.py # Flask server for model serving └── README.md # Project documentation
 
 # 🧪 Model Development Stages
 
