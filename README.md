@@ -1,88 +1,122 @@
-# 🧠 Stroke Prediction Pipeline 🚀 | MLOps at Scale
+# Stroke Prediction Pipeline
 
-Welcome To The Stroke Prediction Pipeline Project! This Project Covers All Stages Of The ML Lifecycle—From Data Ingestion To Model Serving In a Production-Ready Pipeline. With CI/CD Automation using **Github Actions**, **MLFlow** Tracking, and **DVC** Pipeline Orchestration, This Repository Demonstrates an End-To-End **MLOps** Framework Designed To Tackle Real-World Machine Learning Challenges Efficiently
+An end-to-end MLOps project that trains a logistic regression model to estimate stroke risk from nine patient attributes, runs as a DVC pipeline with MLflow model tracking, and serves predictions through a Flask web form and JSON API.
 
-## 🔍 Overview
-This Project Builds a **Logistic Regression** Model To Predict The Likelihood Of Stroke Based On A Dataset. With a Modular Pipeline Architecture and MLFlow Tracking, It Captures The Complete Process Of Building, **Training, Evaluating, and Deploying** The Model. Data is Pulled Directly from **AWS S3**, and The Model Is Served On a Flask Server Hosted on **AWS EC2**.
+![The Flask web form running on an AWS EC2 instance](website.png)
 
-## 🌐 Live Model Endpoint:
-A Website Developed With **HTML** And **CSS**, Hosted On A **Flask** Server, Ensures That All Inputs Fall Within The Recommended Range.
-[Stroke Prediction Site](http://ec2-13-60-233-133.eu-north-1.compute.amazonaws.com:5000/)
+## Overview
 
-![Website](https://github.com/Kevinjoythomas/Stroke-Prediction-Pipeline/blob/main/website.png)
+The data is a 5,110-row healthcare table with 249 stroke cases (4.9%) and 201 missing BMI values. A three-stage DVC pipeline downloads the CSV from S3, fills missing BMI with an XGBoost regressor, encodes the categorical columns as integers, balances the classes with SMOTE, splits the data and trains a logistic regression model. The trained model is copied into a small prediction service that checks every input against allowed ranges before predicting. A Flask app exposes that service as a web form and a JSON endpoint, and GitHub Actions runs the pytest suite on pushes and pull requests to `main`.
 
----
+## Highlights
 
-## Implementation of Google Pipeline Diagram for Project Workflow
-![Project Structure](https://github.com/Kevinjoythomas/Stroke-Prediction-Pipeline/blob/main/pipeline.jpeg)
+- Three DVC stages (`load_data`, `split_data`, `train`) in `dvc.yaml`, with all paths and hyperparameters in `params.yaml`.
+- Missing BMI is predicted by an `XGBRegressor` (200 trees, depth 5) trained on the rows that have BMI (`src/load_data.py`).
+- Input validation against per-feature minimum and maximum values in `prediction_service/schema_in.json`, raising `NotInRange` or `NotInCols` errors.
+- `src/log_production_model.py` promotes the MLflow run with the lowest MAE to Production in the model registry and moves the other versions to Staging.
+- 6 pytest tests in `tests/test_config.py` cover valid input, out-of-range values and wrong column names, run through tox and GitHub Actions.
 
-## 🚀 Key Features
+## Architecture
 
-## 🛠️ End-to-End Machine Learning Pipeline
-- **DVC (Data Version Control)** to manage the ML pipeline  
-- **AWS S3** used for storage of datasets and intermediate artifacts  
-- **MLFlow** to track experiments, metrics, and parameters  
+```mermaid
+flowchart LR
+    S3[("S3 bucket<br/>strokepreddata")] --> L["load_data.py<br/>BMI imputation, encoding, SMOTE"]
+    L --> SP["split.py<br/>40% train, 60% test"]
+    SP --> T["train.py<br/>LogisticRegression C=0.1"]
+    T --> M["model.joblib"]
+    T --> SC["report/scores.json"]
+    REG[("MLflow registry")] --> LP["log_production_model.py"]
+    LP --> M
+    M --> P["prediction_service<br/>range checks + predict"]
+    P --> A["app.py<br/>Flask form + JSON API"]
+    GH["GitHub Actions"] --> PT["pytest"]
+```
 
-## ✅ CI/CD with GitHub Actions
-- Automated testing using **Pytest** and **Tox**  
-- Deployment pipeline ensures continuous integration and delivery with every code change  
+## Results
 
-## 📊 Comprehensive Evaluation Metrics
-**Model:** Logistic Regression
+Two sets of saved numbers exist, and they measure different things.
 
-| Metric       | Precision | Recall | F1-Score | Support |
-|--------------|-----------|--------|----------|---------|
-| Class 0      | 0.83      | 0.78   | 0.80     | 2939    |
-| Class 1      | 0.79      | 0.84   | 0.81     | 2895    |
-| **Accuracy** |           |        | **0.81** | 5834    |
-| **Macro Avg**| 0.81      | 0.81   | 0.81     | 5834    |
-| **Weighted Avg** | 0.81 | 0.81   | 0.81     | 5834    |
+**Pipeline test split** (`report/scores.json`). The pipeline applies SMOTE before splitting, so this test set is class-balanced and includes synthetic stroke rows. `train.py` scores the 0/1 predictions with regression metrics:
 
-**F1 Score:** 0.8105
+| Metric | Value |
+|---|---|
+| RMSE | 0.441 |
+| MAE | 0.194 (with 0/1 labels, this is the share of wrong predictions) |
+| R² | 0.223 |
 
----
+**Held-out test on the real class balance** (`notebooks/src.ipynb`, saved cell outputs). Here SMOTE is applied to the training part only, and the 30% test split keeps the original mix: 1,533 people, 89 of them with a stroke.
 
-# 🧪 Model Development Stages
+| Model | Accuracy | Stroke precision | Stroke recall | Stroke F1 |
+|---|---|---|---|---|
+| Logistic regression (C=0.1, scaled) | 0.784 | 0.15 | 0.60 | 0.243 |
+| Random forest | 0.886 | 0.14 | 0.19 | 0.163 |
 
-## Exploratory Data Analysis (EDA)
-- Extensive EDA to understand data distributions, patterns, and outliers  
-- Feature selection to retain only the most relevant predictors  
+For reference, always predicting "no stroke" would score 0.951 accuracy (the notebook's "Null Accuracy" output), which is why accuracy alone is a poor measure here. The logistic regression finds 60% of stroke cases, but most of the people it flags did not have one. This is a learning project, not a screening tool.
 
-## Preprocessing & Pipeline
-- Handled missing values and data imbalances  
-- Created pipelines for data ingestion, preprocessing, feature extraction, and model training  
+## Tech stack
 
-## Model Training & Evaluation
-- **Model:** Logistic Regression  
-- Tracked hyperparameters and metrics using **MLFlow**  
-- Stored datasets and models with **DVC** for seamless version control  
+Python, pandas, scikit-learn, XGBoost, imbalanced-learn, DVC, MLflow, boto3 (S3), Flask, pytest, tox, GitHub Actions.
 
-## Deployment on AWS EC2
-- Hosted the Flask app on **AWS EC2** with the model endpoint ready for predictions  
+## Quickstart
 
----
+```bash
+git clone https://github.com/Kevinjoythomas/Stroke-Prediction-Pipeline.git
+cd Stroke-Prediction-Pipeline
+# xgboost and imbalanced-learn are used by src/load_data.py but are missing from requirements.txt
+pip install -r requirements.txt xgboost imbalanced-learn
+```
 
-## ⚙️ CI/CD Pipeline
-🚀 This project uses **GitHub Actions** to automate testing, linting, and deployment.  
-Every push triggers the following:
+Run the app with the committed model (`prediction_service/model/model.joblib`):
 
-- **Code Quality Checks:** Run Tox for testing across environments  
-- **Automated Testing:** Use Pytest to verify functionality  
-- **Deployment to EC2:** If all tests pass, the app is redeployed to the AWS server  
+```bash
+python app.py   # http://localhost:5000, Flask debug server
+```
 
----
+JSON request. Keys must be sent in this order, which is the training column order:
 
-## 🧑‍🔬 Testing  
-The project uses **Pytest** for unit tests and **Tox** for cross-environment testing.
+```bash
+curl -X POST http://localhost:5000/ -H "Content-Type: application/json" \
+  -d '{"gender":1,"age":80,"hypertension":1,"heart_disease":1,"work_type":1,"Residence_type":1,"avg_glucose_level":271.74,"bmi":35.0,"smoking_status":3}'
+```
 
-## 🎯 Key Technologies Used
-- **Machine Learning**: Logistic Regression
-- **MLOps**: DVC, MLFlow
-- **Cloud**: AWS EC2, S3
-- **CI/CD**: GitHub Actions
-- **Testing**: Pytest, Tox
-- **Website**: HTML, CSS
-- **Server**: Flask + Gunicorn
+The answer is `{"response": 0}` or `{"response": 1}`. Categorical fields use the integer codes shown in the form, for example gender 0 = male, 1 = female, -1 = other (see `src/load_data.py`).
 
-## 🛡️ Results
-The model achieved **81% accuracy**, with balanced precision and recall for both classes, making it a reliable predictor for stroke detection.
+Run the tests from the repo root:
+
+```bash
+PYTHONPATH=. pytest -v
+```
+
+Re-run the pipeline:
+
+```bash
+export AWS_ACCESS_KEY_ID=...  AWS_SECRET_ACCESS_KEY=...
+dvc repro
+```
+
+`load_data` downloads the CSV from the S3 bucket named in `params.yaml`, so it needs credentials with access to that bucket. The same CSV is in `data_given/`, but `load_data.py` does not read it.
+
+## Project structure
+
+```
+params.yaml                    paths and hyperparameters
+dvc.yaml, dvc.lock             pipeline stages and recorded hashes
+src/                           get_data, load_data, split, train, log_production_model
+prediction_service/            validation, prediction, model.joblib, schema_in.json
+app.py, webapp/templates/      Flask app and HTML form
+tests/                         pytest suite
+notebooks/src.ipynb            exploration, model comparison, held-out results above
+data_given/                    source CSV (5,110 rows)
+.github/workflows/ci-cd.yaml   CI: install dependencies and run pytest
+```
+
+## Limitations and next steps
+
+- SMOTE runs before the train/test split, so the pipeline's own test set contains synthetic stroke rows and its scores overstate real performance. The fix is to split first and resample only the training part, as the notebook does.
+- `train.py` reports regression metrics and model promotion picks the lowest MAE. Recall and precision on the stroke class would be the right measures for this problem.
+- The CI workflow installs dependencies and runs pytest only; it has no deployment step. `app.py` starts the Flask debug server, which should be replaced by Gunicorn behind a proxy before any public use.
+- The committed model was saved with scikit-learn 1.4.2, and newer versions print a warning when loading it.
+
+## License
+
+No license specified yet.
